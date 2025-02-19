@@ -11,8 +11,10 @@
 
  ```
  - the output of the above command will list the library Id and library Name :computer:
- `ID: 1, Name: Central Library`
- 
+ ```
+ ID: 1, Name: Central Library
+ ID: 2, Name: Central Library
+ ```
  thus we can use the library ID to get the library ID using the url 
 
 ![image of django shell](/django-models/LibraryProject/screenshot/django-shell.png)
