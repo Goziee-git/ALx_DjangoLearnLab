@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic.detail import DetailView
 from .models import Book
 from .models import Library
-from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm 
+from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm
 
 
 def list_books(request):
@@ -19,11 +19,11 @@ def register(request):
    if request.method == 'POST':
       form = UserCreationForm(request.POST)
       if form.is_valid():
-         user = form.get_user()
+         user = form.save()
          login(request, user)
          return redirect('list_books')
    else:
-      form = AuthenticationForm()
+      form = UserCreationForm()
    return render(request, 'relationship_app/register.html', {'form': form})
 
 def user_login(request):
