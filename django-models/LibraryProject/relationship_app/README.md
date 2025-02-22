@@ -23,3 +23,9 @@
 <https://127.0.0.1:8000/relationship/library/1/>
 
 ![image of the url opened in a browser](/django-models/LibraryProject/screenshot/image_in_browser.png)
+
+## 3. HANDLING THE CACHE FILES.
+python interpreter executes the **.py** files and compiles them into bytecode stored in the __pycache__ directory as **.pyc** file. This helps to improve the speed of execution of the code, so the next time the python file is run, python execute the bytecode without needing to recompile the code.
+
+- use this command if you want to delete the cache file
+'''find . -name "__pycache__" -exec rm -r {} +'''

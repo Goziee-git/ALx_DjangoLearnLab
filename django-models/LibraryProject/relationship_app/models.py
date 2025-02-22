@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+# The UserProfile model extends the built-in User model with an additional role field.
 class UserProfile(models.Model):
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
@@ -24,12 +25,14 @@ def create_user_profile(sender, instance, created, **kwargs):
 def save_user_profile(sender, instance, **kwargs):
     instance.userprofile.save()
 
+# The Author model represents a book author with a name field.
 class Author(models.Model):
     name = models.CharField(max_length=100)
     
     def __str__(self):
         return self.name
 
+# The Book model represents a book with a title and a foreign key to the Author model.
 class Book(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='books')
@@ -37,6 +40,7 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+# The Library model represents a library with a name and a many-to-many relationship with the Book model.
 class Library(models.Model):
     name = models.CharField(max_length=200)
     books = models.ManyToManyField(Book, related_name='libraries')
@@ -44,6 +48,7 @@ class Library(models.Model):
     def __str__(self):
         return self.name
 
+# The Librarian model represents a librarian with a name and a foreign key to the Library model.
 class Librarian(models.Model):
     name = models.CharField(max_length=100)
     library = models.OneToOneField(Library, on_delete=models.CASCADE, related_name='librarian')

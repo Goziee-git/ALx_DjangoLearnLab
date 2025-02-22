@@ -1,6 +1,6 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from relationship_app.views.register import register
+from relationship_app.views.register_view import register
 from relationship_app.views.list_books import list_books
 from relationship_app.views.library_detail_view import LibraryDetailView
 from relationship_app.views.user_login import user_login
