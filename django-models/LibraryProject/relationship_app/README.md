@@ -28,6 +28,5 @@
 python interpreter executes the **.py** files and compiles them into bytecode stored in the __pycache__ directory as **.pyc** file. This helps to improve the speed of execution of the code, so the next time the python file is run, python execute the bytecode without needing to recompile the code.
 
 - use this command if you want to delete the cache file
-'''
-find . -name "__pycache__" -exec rm -r {} +
-'''
+
+ find . -name "__pycache__" -exec rm -r {} +
