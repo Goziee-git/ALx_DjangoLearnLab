@@ -1,6 +1,16 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.decorators import user_passes_test
 from .views import register, list_books, LibraryDetailView, user_login, user_logout, Admin, librarian_view, member_view
+
+def is_admin(user):
+    return user.is_authenticated and user.is_admin
+
+def is_librarian(user):
+    return user.is_authenticated and user.is_librarian
+
+def is_member(user):
+    return user.is_authenticated and user.is_member
 
 urlpatterns = [
     path('books/', list_books, name='list_books'),
@@ -8,7 +18,7 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', LoginView.as_view(template_name='relationship_app/login.html'), name='login'),
     path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html'), name='logout'),
-    path('admin/', Admin, name='admin'),
-    path('librarian/', librarian_view, name='librarian'),
-    path('member/', member_view, name='member'),
+    path('admin/', user_passes_test(is_admin)(Admin), name='admin'),
+    path('librarian/', user_passes_test(is_librarian)(librarian_view), name='librarian'),
+    path('member/', user_passes_test(is_member)(member_view), name='member'),
 ]
