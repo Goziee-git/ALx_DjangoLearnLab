@@ -4,6 +4,7 @@ from .models import Book, Library, UserProfile
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import user_passes_test
+from .models import Library
 
 # This function retrieves all Book objects from the database and renders them in the 'list_books.html' template.
 def list_books(request):
