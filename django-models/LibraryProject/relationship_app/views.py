@@ -70,3 +70,21 @@ def is_member(user):
 @user_passes_test(is_member)
 def member_view(request):
    return render(request, 'relationship_app/member.html')
+
+# Define a view for Admin role
+@user_passes_test(lambda u: u.is_authenticated and u.userprofile.role == 'Admin')
+def admin_view(request):
+    # Render the admin view template
+    return render(request, 'relationship_app/admin_view.html')
+
+# Define a view for Librarian role
+@user_passes_test(lambda u: u.is_authenticated and u.userprofile.role == 'Librarian')
+def librarian_view(request):
+    # Render the librarian view template
+    return render(request, 'relationship_app/librarian_view.html')
+
+# Define a view for Member role
+@user_passes_test(lambda u: u.is_authenticated and u.userprofile.role == 'Member')
+def member_view(request):
+    # Render the member view template
+    return render(request, 'relationship_app/member_view.html')

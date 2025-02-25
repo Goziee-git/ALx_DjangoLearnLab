@@ -3,19 +3,22 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-# The UserProfile model extends the built-in User model with an additional role field.
+# Define choices for user roles
+ROLE_CHOICES = (
+    ('Admin', 'Admin'),
+    ('Librarian', 'Librarian'),
+    ('Member', 'Member'),
+)
+
+# Create a UserProfile model that includes a role field with predefined roles
 class UserProfile(models.Model):
-    ROLE_CHOICES = [
-        ('Admin', 'Admin'),
-        ('Librarian', 'Librarian'),
-        ('Member', 'Member'),
-    ]
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     role = models.CharField(max_length=10, choices=ROLE_CHOICES)
 
     def __str__(self):
         return self.user.username
 
+# Use Django signals to automatically create a UserProfile when a new user is registered
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
