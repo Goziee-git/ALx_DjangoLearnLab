@@ -19,12 +19,8 @@ urlpatterns = [
     
     # Authentication URLs - Using Django's built-in class-based views
     path('register/', views.register, name='register'),
-    path('login/', LoginView.as_view(
-        template_name='relationship_app/login.html'  # Specify the login template
-    ), name='login'),
-    path('logout/', LogoutView.as_view(
-        template_name='relationship_app/logout.html', next_page='login'  # Specify the logout template
-    ), name='logout'),
+    path('login/', LoginView.as_view(template_name='relationship_app/login.html'), name='login'), #uses the as_view method called on the built in LoginView CBV
+    path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html', next_page='login'), name='logout'), #uses the as_view method called on the built in LogoutView CBV
     
     # Role-based URLs
     path('admin/', user_passes_test(is_admin)(admin_view), name='admin'),
