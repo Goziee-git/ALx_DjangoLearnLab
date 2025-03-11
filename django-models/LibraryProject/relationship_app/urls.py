@@ -1,14 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import user_passes_test
-from .views import (
-    register,
-    list_books, 
-    LibraryDetailView,
-    admin_view, 
-    librarian_view, 
-    member_view
-)
+from .views import views
 
 def is_admin(user):
     return user.is_authenticated and user.userprofile.role == 'Admin'
@@ -25,7 +18,7 @@ urlpatterns = [
     path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
     
     # Authentication URLs - Using Django's built-in class-based views
-    path('register/', register, name='register'),
+    path('register/', views.register, name='register'),
     path('login/', LoginView.as_view(
         template_name='relationship_app/login.html'  # Specify the login template
     ), name='login'),
