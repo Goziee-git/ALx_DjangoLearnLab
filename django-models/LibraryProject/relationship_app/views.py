@@ -42,9 +42,13 @@ def user_login(request):
    return render(request, 'relationship_app/login.html', {'form': form})
 
 # This function logs out the user and renders the 'logout.html' template.
-def user_logout(request):
-   logout(request)
-   return render(request, 'relationship_app/logout.html')
+'''
+this code below is formatted because it tries to use the GET request for the logout operation and is not
+recommended for security reasons
+'''
+#def user_logout(request):
+#    logout(request)
+#   return render(request, 'relationship_app/logout.html')
 
 # These functions check the role of the user and return True if the user has the specified role.
 def is_admin(user):

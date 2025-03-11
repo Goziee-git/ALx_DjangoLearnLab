@@ -2,11 +2,9 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import user_passes_test
 from .views import (
-    register,  # Explicitly import register view
+    register,
     list_books, 
-    LibraryDetailView, 
-    user_login, 
-    user_logout, 
+    LibraryDetailView,
     admin_view, 
     librarian_view, 
     member_view
@@ -26,10 +24,14 @@ urlpatterns = [
     path('books/', list_books, name='list_books'),
     path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
     
-    # Authentication URLs
-    path('register/', register, name='register'),  # Register URL should match views.register
-    path('accounts/login/', user_login, name='login'),
-    path('accounts/logout/', user_logout, name='logout'),
+    # Authentication URLs - Using Django's built-in class-based views
+    path('register/', register, name='register'),
+    path('login/', LoginView.as_view(
+        template_name='relationship_app/login.html'  # Specify the login template
+    ), name='login'),
+    path('logout/', LogoutView.as_view(
+        template_name='relationship_app/logout.html', next_page='login'  # Specify the logout template
+    ), name='logout'),
     
     # Role-based URLs
     path('admin/', user_passes_test(is_admin)(admin_view), name='admin'),
