@@ -51,7 +51,7 @@ recommended for security reasons
 #   return render(request, 'relationship_app/logout.html')
 
 # These functions check the role of the user and return True if the user has the specified role.
-def is_admin(user):
+def Admin(user):
    return user.is_authenticated and user.userprofile.role == 'Admin'
    
 @login_required
