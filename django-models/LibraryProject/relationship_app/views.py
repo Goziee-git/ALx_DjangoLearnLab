@@ -51,26 +51,26 @@ recommended for security reasons
 #   return render(request, 'relationship_app/logout.html')
 
 # These functions check the role of the user and return True if the user has the specified role.
-def Admin(user):
+def admin_view(user):
    return user.is_authenticated and user.userprofile.role == 'Admin'
    
 @login_required
-@user_passes_test(is_admin)
+@user_passes_test(admin_view)
 def admin_view(request):
    return render(request, 'relationship_app/admin.html')
 
-def is_librarian(user):
+def librarian_view(user):
    return user.is_authenticated and user.userprofile.role == 'librarian'
 
 @login_required
-@user_passes_test(is_librarian)
+@user_passes_test(librarian_view)
 def librarian_view(request):
    return render(request, 'relationship_app/librarian.html')
 
-def is_member(user):
+def member_view(user):
    return user.is_authenticated and user.userprofile.role == 'Member'
 
 @login_required
-@user_passes_test(is_member)
+@user_passes_test(member_view)
 def member_view(request):
    return render(request, 'relationship_app/member.html')
