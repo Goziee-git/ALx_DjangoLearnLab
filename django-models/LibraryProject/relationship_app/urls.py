@@ -1,7 +1,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import user_passes_test
-from .views import views
+from . import views
 
 def is_admin(user):
     return user.is_authenticated and user.userprofile.role == 'Admin'
@@ -14,8 +14,8 @@ def is_member(user):
 
 urlpatterns = [
     # Main application URLs
-    path('books/', list_books, name='list_books'),
-    path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
+    path('books/', views.list_books, name='list_books'),
+    path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
     
     # Authentication URLs - Using Django's built-in class-based views
     path('register/', views.register, name='register'),
@@ -23,7 +23,7 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(template_name='relationship_app/logout.html', next_page='login'), name='logout'), #uses the as_view method called on the built in LogoutView CBV
     
     # Role-based URLs
-    path('admin/', user_passes_test(is_admin)(admin_view), name='admin'),
-    path('librarian/', user_passes_test(is_librarian)(librarian_view), name='librarian'),
-    path('member/', user_passes_test(is_member)(member_view), name='member'),
+    path('admin/', user_passes_test(is_admin)(views.admin_view), name='admin'),
+    path('librarian/', user_passes_test(is_librarian)(views.librarian_view), name='librarian'),
+    path('member/', user_passes_test(is_member)(views.member_view), name='member'),
 ]
