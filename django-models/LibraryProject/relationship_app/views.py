@@ -50,4 +50,40 @@ recommended for security reasons
 #    logout(request)
 #   return render(request, 'relationship_app/logout.html')
 
+def check_librarian_role(user):
+    """Check if user has Librarian role"""
+    return user.is_authenticated and user.userprofile.role == 'Librarian'
 
+@login_required
+@user_passes_test(check_librarian_role)
+def librarian_view(request):
+    context = {
+        'books': Book.objects.all(),
+        'libraries': Library.objects.all(),
+    }
+    return render(request, 'relationship_app/librarian.html', context)
+
+
+def check_member_role(user):
+    """Check if user has Member role"""
+    return user.is_authenticated and user.userprofile.role == 'Member'
+
+@login_required
+@user_passes_test(check_member_role)
+def member_view(request):
+    return render(request, 'relationship_app/member.html')
+
+def check_admin_role(user):
+    """Check if user has Admin role"""
+    return user.is_authenticated and user.userprofile.role == 'Admin'
+
+@login_required
+@user_passes_test(check_admin_role)
+def admin_view(request):
+    context = {
+        'total_books': Book.objects.count(),
+        'total_libraries': Library.objects.count(),
+        'total_users': UserProfile.objects.count(),
+        'user': request.user
+    }
+    return render(request, 'relationship_app/admin.html', context)
