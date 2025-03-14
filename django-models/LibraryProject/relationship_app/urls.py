@@ -2,9 +2,9 @@ from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.decorators import user_passes_test
 from . import views 
-from . view.admin_view import check_admin_role, admin_view
-from . view.librarian_view import check_librarian_role, librarian_view
-from . view.member_view import check_member_role, member_view
+from . admin_view import check_admin_role, admin_view
+from . librarian_view import check_librarian_role, librarian_view
+from . member_view import check_member_role, member_view
 
 
 urlpatterns = [
