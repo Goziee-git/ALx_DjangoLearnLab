@@ -1,9 +1,114 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Admin Dashboard</title>
-</head>
-<body>
-    <h1>Welcome to the Admin Dashboard</h1>
-</body>
-</html>
+{% extends 'relationship_app/base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block styles %}
+<style>
+    .admin-container {
+        max-width: 1200px;
+        margin: 2em auto;
+        padding: 2em;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .admin-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2em;
+        padding-bottom: 1em;
+        border-bottom: 2px solid #eee;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5em;
+        margin-bottom: 2em;
+    }
+
+    .stat-card {
+        background: #f8f9fa;
+        padding: 1.5em;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        transition: transform 0.2s;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .stat-number {
+        font-size: 2em;
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    .admin-actions {
+        background: #fff;
+        padding: 1.5em;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .action-buttons {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1em;
+        margin-top: 1em;
+    }
+
+    .action-button {
+        padding: 1em;
+        border: none;
+        border-radius: 6px;
+        background: #3498db;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .action-button:hover {
+        background: #2980b9;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="admin-container">
+    <div class="admin-header">
+        <h1>Admin Dashboard</h1>
+        <span>Welcome, {{ user.username }}</span>
+    </div>
+
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">{{ total_books|default:"0" }}</div>
+            <div class="stat-label">Total Books</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ total_users|default:"0" }}</div>
+            <div class="stat-label">Registered Users</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">{{ total_libraries|default:"0" }}</div>
+            <div class="stat-label">Libraries</div>
+        </div>
+    </div>
+
+    <div class="admin-actions">
+        <h2>Administrative Actions</h2>
+        <div class="action-buttons">
+            <a href="{% url 'list_books' %}" class="action-button">Manage Books</a>
+            <a href="#" class="action-button">Manage Users</a>
+            <a href="#" class="action-button">View Reports</a>
+            <a href="#" class="action-button">System Settings</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
