@@ -1,14 +1,124 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-</head>
-<body>
-    <h1>Register</h1>
+{% extends 'relationship_app/base.html' %}
+
+{% block title %}Register - Library Management{% endblock %}
+
+{% block styles %}
+    .register-container {
+        max-width: 500px;
+        margin: 2em auto;
+        padding: 2em;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .register-title {
+        color: #2c3e50;
+        text-align: center;
+        margin-bottom: 1.5em;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .form-group {
+        margin-bottom: 1.2em;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5em;
+        color: #34495e;
+        font-weight: 500;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 10px;
+        border: 2px solid #bdc3c7;
+        border-radius: 4px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input:focus {
+        outline: none;
+        border-color: #3498db;
+        box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    .register-button {
+        width: 100%;
+        padding: 12px;
+        background-color: #2c3e50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        margin-top: 1em;
+        font-weight: 500;
+    }
+
+    .register-button:hover {
+        background-color: #34495e;
+    }
+
+    .register-footer {
+        text-align: center;
+        margin-top: 1.5em;
+        padding-top: 1.5em;
+        border-top: 1px solid #ecf0f1;
+    }
+
+    .register-footer a {
+        color: #3498db;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .register-footer a:hover {
+        text-decoration: underline;
+    }
+
+    .error-message {
+        color: #e74c3c;
+        font-size: 14px;
+        margin-top: 0.5em;
+    }
+
+    .helptext {
+        display: block;
+        font-size: 13px;
+        color: #7f8c8d;
+        margin-top: 0.5em;
+        line-height: 1.4;
+    }
+{% endblock %}
+
+{% block content %}
+<div class="register-container">
+    <h2 class="register-title">Create Account</h2>
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Register</button>
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <span class="helptext">{{ field.help_text }}</span>
+                {% endif %}
+                {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="error-message">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="register-button">Create Account</button>
     </form>
-</body>
-</html>
+    <div class="register-footer">
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+    </div>
+</div>
+{% endblock %}
