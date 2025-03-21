@@ -34,7 +34,8 @@ class Author(models.Model):
     
     def __str__(self):
         return self.name
-
+    
+    
 # The Book model represents a book with a title and a foreign key to the Author model.
 class Book(models.Model):
     title = models.CharField(max_length=200)
@@ -42,6 +43,16 @@ class Book(models.Model):
     
     def __str__(self):
         return self.title
+
+    class Meta:
+        permissions = [
+            ("can_add_book", "can add a book"),
+            ("can_delete_book", "can delete a book"),
+            ("can_edit_book", "can edit a book"),
+            ("can_view_book", "can view a book"),
+        ]
+
+    
 
 # The Library model represents a library with a name and a many-to-many relationship with the Book model.
 class Library(models.Model):

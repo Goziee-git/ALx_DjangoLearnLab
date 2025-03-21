@@ -17,4 +17,10 @@ urlpatterns = [
     path('admin/', user_passes_test(views.check_admin_role)(views.admin_view), name='admin'),
     path('librarian/', user_passes_test(views.check_librarian_role)(views.librarian_view), name='librarian'),
     path('member/', user_passes_test(views.check_member_role)(views.member_view), name='member'),
+
+     # Book management URLs
+    path('book/add/', views.add_book, name='add_book'),
+    path('book/<int:book_id>/edit/', views.edit_book, name='edit_book'),
+    path('book/<int:book_id>/delete/', views.delete_book, name='delete_book'),
+       
 ]

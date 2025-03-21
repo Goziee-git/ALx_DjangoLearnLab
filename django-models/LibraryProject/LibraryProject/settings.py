@@ -50,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'relationship_app.middleware.PermissionMiddleware',  # Custom permission middleware
 ]
 
 ROOT_URLCONF = 'LibraryProject.urls'
