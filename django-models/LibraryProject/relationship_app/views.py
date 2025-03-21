@@ -3,7 +3,7 @@ from django.views.generic.detail import DetailView
 from .models import Book, Library, UserProfile
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.decorators import login_required, user_passes_test, permission_required
+from django.contrib.auth.decorators import permission_required, user_passes_test, login_required
 from django.http import HttpResponseForbidden
 from .utils import assign_admin_permissions, assign_librarian_permissions, assign_member_permissions
 
