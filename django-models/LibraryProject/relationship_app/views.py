@@ -90,8 +90,8 @@ def edit_book(request, book_id):
             book.save()
             return redirect('list_books')
         else:
-            return render(request, 'relationship_app/edit_book.html', {'book': book, 'error': 'Title and Author are required.'})
-    return render(request, 'relationship_app/edit_book.html', {'book': book, 'error': None})
+            return render(request, 'relationship_app/change_book.html', {'book': book, 'error': 'Title and Author are required.'})
+    return render(request, 'relationship_app/change_book.html', {'book': book, 'error': None})
 
         
 
@@ -141,7 +141,7 @@ def admin_view(request):
     user = request.user
     if not user.has_perm('relationship_app.can_add_book'):
         user.user_permissions.add('relationship_app.can_add_book')
-        user.user_permissions.add('relationship_app.can_edit_book')
+        user.user_permissions.add('relationship_app.can_change_book')
         user.user_permissions.add('relationship_app.can_delete_book')
         user.user_permissions.add('relationship_app.can_view_book')
     context = {

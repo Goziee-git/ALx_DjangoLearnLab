@@ -8,7 +8,7 @@ class PermissionMiddleware(MiddlewareMixin):
             # Check for specific permissions based on the request path
             if request.path.startswith('/add_book/') and not request.user.has_perm('relationship_app.can_add_book'):
                 return HttpResponseForbidden("You do not have permission to add books.")
-            elif request.path.startswith('/edit_book/') and not request.user.has_perm('relationship_app.can_edit_book'):
+            elif request.path.startswith('/change_book/') and not request.user.has_perm('relationship_app.can_edit_book'):
                 return HttpResponseForbidden("You do not have permission to edit books.")
             elif request.path.startswith('/delete_book/') and not request.user.has_perm('relationship_app.can_delete_book'):
                 return HttpResponseForbidden("You do not have permission to delete books.")

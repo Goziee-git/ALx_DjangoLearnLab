@@ -14,9 +14,9 @@ def create_user_profile(sender, instance, created, **kwargs):
         
         # Define permission codenames based on role
         if profile.role == 'Admin':
-            codenames = ['can_add_book', 'can_edit_book', 'can_delete_book', 'can_view_book']
+            codenames = ['can_add_book', 'can_change_book', 'can_delete_book', 'can_view_book']
         elif profile.role == 'Librarian':
-            codenames = ['can_add_book', 'can_edit_book', 'can_view_book']
+            codenames = ['can_add_book', 'can_change_book', 'can_view_book']
         else:  # Member
             codenames = ['can_view_book']
             

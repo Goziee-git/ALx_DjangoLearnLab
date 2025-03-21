@@ -49,7 +49,7 @@ class BookPermissionTests(TestCase):
             content_type=self.book_content_type,
         )
         self.edit_permission = Permission.objects.get(
-            codename='can_edit_book',
+            codename='can_change_book',
             content_type=self.book_content_type,
         )
         self.delete_permission = Permission.objects.get(
@@ -67,9 +67,9 @@ class BookPermissionTests(TestCase):
         self.assertTrue(Book.objects.filter(title="New Test Book").exist())
 
     def test_librarian_can_edit_book(self):
-        '''test that librarian can edit books'''
+        '''test that librarian can change books'''
         self.client.login(username='librarian', password='libpass')
-        response = self.client.post(reverse('edit_book', kwargs={'book_id': self.book.id}), {
+        response = self.client.post(reverse('change_book', kwargs={'book_id': self.book.id}), {
             'title': 'Updated Book',
             'author': self.author.id
         })

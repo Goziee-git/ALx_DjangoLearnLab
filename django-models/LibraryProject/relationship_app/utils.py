@@ -18,7 +18,7 @@ def assign_librarian_permissions(user):
     """Assign view, add, and edit permissions to librarian users"""
     book_permissions = Permission.objects.filter(
         content_type=ContentType.objects.get_for_model(Book),
-        codename__in=['can_view_book', 'can_add_book', 'can_edit_book']
+        codename__in=['can_view_book', 'can_add_book', 'can_change_book']
     )
     user.user_permissions.add(*book_permissions)
     user.save()
