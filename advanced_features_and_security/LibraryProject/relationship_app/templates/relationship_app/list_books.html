@@ -1,0 +1,19 @@
+
+{% extends 'relationship_app/base.html' %}
+
+{% block title %}Book List - Library Management{% endblock %}
+
+{% block content %}
+<div class="books-container">
+    <h1>Available Books</h1>
+    {% if books %}
+        <ul>
+        {% for book in books %}
+            <li>{{ book.title }}</li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No books available.</p>
+    {% endif %}
+</div>
+{% endblock %}
